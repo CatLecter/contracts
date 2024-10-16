@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package user;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "v1/user";
+
+service User {
+  rpc Get (UserBriefRequest) returns (UserResponse);
+  rpc Create (UserRequest) returns (UserBriefResponse);
+  rpc Update (UserRequest) returns (UserResponse);
+  rpc Delete (UserBriefRequest) returns (UserBriefResponse);
+}
+
+message UserBriefRequest {
+  string user_id = 1;
+}
+
+message UserRequest {
+  string username = 1;
+  string email = 2;
+}
+
+message UserBriefResponse {
+  string user_id = 1;
+}
+
+message UserResponse {
+  string user_id = 1;
+  string username = 2;
+  string email = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
