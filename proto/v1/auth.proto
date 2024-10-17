@@ -4,7 +4,7 @@ package auth;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "v1/auth";
+option go_package = "v1/auth;auth_v1";
 
 service Auth {
   rpc Register (NewUserRequest) returns (LoginResponse);
