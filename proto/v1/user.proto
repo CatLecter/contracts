@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package CatLecter.contracts.v1.user;
+package user;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "v1/user;user_v1";
+option go_package = "CatLecter.v1.user;user_v1";
 
 service User {
   rpc Get (UserBriefRequest) returns (UserResponse);

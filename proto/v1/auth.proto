@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package CatLecter.contracts.v1.auth;
+package auth;
 
-option go_package = "v1/auth;auth_v1";
+option go_package = "CatLecter.v1.auth;auth_v1";
 
 service Auth {
   rpc Register (NewUserRequest) returns (LoginResponse);
