@@ -4,7 +4,7 @@ package user;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "v1/user;user_v1";
+option go_package = "v1/user;userv1";
 
 service User {
   rpc Register (UserRequest)      returns (LoginResponse);
