@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.28.3
-// source: v1/user.proto
+// source: protos/iam/v1/user.proto
 
-package userv1
+package user
 
 import (
 	context "context"
@@ -20,12 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_Create_FullMethodName         = "/user.User/Create"
-	User_Get_FullMethodName            = "/user.User/Get"
-	User_Update_FullMethodName         = "/user.User/Update"
-	User_Login_FullMethodName          = "/user.User/Login"
-	User_Search_FullMethodName         = "/user.User/Search"
-	User_ChangePassword_FullMethodName = "/user.User/ChangePassword"
+	User_Create_FullMethodName         = "/iam.User/Create"
+	User_Get_FullMethodName            = "/iam.User/Get"
+	User_Update_FullMethodName         = "/iam.User/Update"
+	User_Login_FullMethodName          = "/iam.User/Login"
+	User_Search_FullMethodName         = "/iam.User/Search"
+	User_ChangePassword_FullMethodName = "/iam.User/ChangePassword"
 )
 
 // UserClient is the client API for User service.
@@ -279,7 +279,7 @@ func _User_ChangePassword_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var User_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.User",
+	ServiceName: "iam.User",
 	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -308,5 +308,5 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "v1/user.proto",
+	Metadata: "protos/iam/v1/user.proto",
 }
