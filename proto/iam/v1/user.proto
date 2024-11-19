@@ -5,7 +5,7 @@ package iam;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/CatLecter/contracts/gen/go/iam/v1;user";
+option go_package = "github.com/CatLecter/contracts/gen/go/proto/iam/v1;user";
 
 service User {
     rpc Create         (CreateUserRequest) returns (UserBriefResponse);
