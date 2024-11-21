@@ -58,6 +58,7 @@ message UserResponse {
     string                    email = 4;
     string                    active = 5;
     google.protobuf.Timestamp last_login = 6;
+    repeated string groups = 7;
 }
 
 message SearchRequest {
