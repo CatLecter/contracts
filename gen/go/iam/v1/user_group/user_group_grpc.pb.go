@@ -20,13 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserGroups_Get_FullMethodName                   = "/iam.UserGroups/Get"
-	UserGroups_Search_FullMethodName                = "/iam.UserGroups/Search"
-	UserGroups_Create_FullMethodName                = "/iam.UserGroups/Create"
-	UserGroups_Update_FullMethodName                = "/iam.UserGroups/Update"
-	UserGroups_Delete_FullMethodName                = "/iam.UserGroups/Delete"
-	UserGroups_AddUsersToGroups_FullMethodName      = "/iam.UserGroups/AddUsersToGroups"
-	UserGroups_DeleteUsersFromGroups_FullMethodName = "/iam.UserGroups/DeleteUsersFromGroups"
+	UserGroups_Get_FullMethodName                   = "/iam.user_group.UserGroups/Get"
+	UserGroups_Search_FullMethodName                = "/iam.user_group.UserGroups/Search"
+	UserGroups_Create_FullMethodName                = "/iam.user_group.UserGroups/Create"
+	UserGroups_Update_FullMethodName                = "/iam.user_group.UserGroups/Update"
+	UserGroups_Delete_FullMethodName                = "/iam.user_group.UserGroups/Delete"
+	UserGroups_AddUsersToGroups_FullMethodName      = "/iam.user_group.UserGroups/AddUsersToGroups"
+	UserGroups_DeleteUsersFromGroups_FullMethodName = "/iam.user_group.UserGroups/DeleteUsersFromGroups"
 )
 
 // UserGroupsClient is the client API for UserGroups service.
@@ -313,7 +313,7 @@ func _UserGroups_DeleteUsersFromGroups_Handler(srv interface{}, ctx context.Cont
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var UserGroups_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "iam.UserGroups",
+	ServiceName: "iam.user_group.UserGroups",
 	HandlerType: (*UserGroupsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

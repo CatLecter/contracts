@@ -20,12 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_Create_FullMethodName         = "/iam.User/Create"
-	User_Get_FullMethodName            = "/iam.User/Get"
-	User_Update_FullMethodName         = "/iam.User/Update"
-	User_Login_FullMethodName          = "/iam.User/Login"
-	User_Search_FullMethodName         = "/iam.User/Search"
-	User_ChangePassword_FullMethodName = "/iam.User/ChangePassword"
+	User_Create_FullMethodName         = "/iam.user.User/Create"
+	User_Get_FullMethodName            = "/iam.user.User/Get"
+	User_Update_FullMethodName         = "/iam.user.User/Update"
+	User_Login_FullMethodName          = "/iam.user.User/Login"
+	User_Search_FullMethodName         = "/iam.user.User/Search"
+	User_ChangePassword_FullMethodName = "/iam.user.User/ChangePassword"
 )
 
 // UserClient is the client API for User service.
@@ -279,7 +279,7 @@ func _User_ChangePassword_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var User_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "iam.User",
+	ServiceName: "iam.user.User",
 	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
