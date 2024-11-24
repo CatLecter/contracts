@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package iam;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/CatLecter/contracts/gen/go/iam/v1;user";
+
+service User {
+  rpc Create         (CreateUserRequest) returns (UserBriefResponse);
+  rpc Get            (UserBriefRequest)  returns (UserResponse);
+  rpc Update         (UpdateUserRequest) returns (google.protobuf.Empty);
+  rpc Login          (LoginRequest)      returns (LoginResponse);
+  rpc Search         (SearchRequest)     returns (SearchResponse);
+  rpc ChangePassword (Passwords)         returns (google.protobuf.Empty);
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message UserBriefRequest {
+  string user_id = 1;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+  string full_name = 3;
+  string password = 4;
+  string active = 5;
+}
+
+message UpdateUserRequest {
+  string user_id = 1;
+  string username = 2;
+  string email = 3;
+  string full_name = 4;
+  string password = 5;
+  string active = 6;
+}
+
+message LoginResponse {
+  string access_token = 1;
+}
+
+message UserBriefResponse {
+  string user_id = 1;
+}
+
+message UserResponse {
+  string                    user_id = 1;
+  string                    username = 2;
+  string                    full_name = 3;
+  string                    email = 4;
+  string                    active = 5;
+  google.protobuf.Timestamp last_login = 6;
+}
+
+message SearchRequest {
+  string query = 1;
+  uint32 page = 2;
+  uint32 page_size = 3;
+}
+
+message Pagination {
+  uint32 total_page = 1;
+  uint32 total_items = 2;
+}
+
+message Metadata {
+  Pagination pagination = 1;
+}
+
+message SearchResponse {
+  repeated UserResponse data = 1;
+  Metadata metadata = 2;
+}
+
+message Passwords {
+  string user_id = 1;
+  string old_password = 2;
+  string new_password = 3;
+}
