@@ -7,13 +7,13 @@ import "google/protobuf/empty.proto";
 option go_package = "github.com/CatLecter/contracts/gen/go/iam/v1;user_group";
 
 service UserGroups {
-  rpc Get    (UserGroupBriefRequest)  returns (UserGroupResponse);
-  rpc Search (SearchRequest)          returns (SearchResponse);
-  rpc Create (CreateUserGroupRequest) returns (google.protobuf.Empty);
-  rpc Update (UpdateUserGroupRequest) returns (google.protobuf.Empty);
-  rpc Delete (UserGroupBriefRequest)  returns (google.protobuf.Empty);
-  rpc AddingUsers (UsersInGroups)     returns (google.protobuf.Empty);
-  rpc DeletingUsers (UsersInGroups)   returns (google.protobuf.Empty);
+  rpc Get    (UserGroupBriefRequest)        returns (UserGroupResponse);
+  rpc Search (SearchRequest)                returns (SearchResponse);
+  rpc Create (CreateUserGroupRequest)       returns (google.protobuf.Empty);
+  rpc Update (UpdateUserGroupRequest)       returns (google.protobuf.Empty);
+  rpc Delete (UserGroupBriefRequest)        returns (google.protobuf.Empty);
+  rpc AddUsersToGroups (UsersInGroups)      returns (google.protobuf.Empty);
+  rpc DeleteUsersFromGroups (UsersInGroups) returns (google.protobuf.Empty);
 }
 
 message UserGroupBriefRequest {

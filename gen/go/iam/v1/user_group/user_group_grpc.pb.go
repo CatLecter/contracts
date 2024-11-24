@@ -20,13 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserGroups_Get_FullMethodName           = "/iam.UserGroups/Get"
-	UserGroups_Search_FullMethodName        = "/iam.UserGroups/Search"
-	UserGroups_Create_FullMethodName        = "/iam.UserGroups/Create"
-	UserGroups_Update_FullMethodName        = "/iam.UserGroups/Update"
-	UserGroups_Delete_FullMethodName        = "/iam.UserGroups/Delete"
-	UserGroups_AddingUsers_FullMethodName   = "/iam.UserGroups/AddingUsers"
-	UserGroups_DeletingUsers_FullMethodName = "/iam.UserGroups/DeletingUsers"
+	UserGroups_Get_FullMethodName                   = "/iam.UserGroups/Get"
+	UserGroups_Search_FullMethodName                = "/iam.UserGroups/Search"
+	UserGroups_Create_FullMethodName                = "/iam.UserGroups/Create"
+	UserGroups_Update_FullMethodName                = "/iam.UserGroups/Update"
+	UserGroups_Delete_FullMethodName                = "/iam.UserGroups/Delete"
+	UserGroups_AddUsersToGroups_FullMethodName      = "/iam.UserGroups/AddUsersToGroups"
+	UserGroups_DeleteUsersFromGroups_FullMethodName = "/iam.UserGroups/DeleteUsersFromGroups"
 )
 
 // UserGroupsClient is the client API for UserGroups service.
@@ -38,8 +38,8 @@ type UserGroupsClient interface {
 	Create(ctx context.Context, in *CreateUserGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Update(ctx context.Context, in *UpdateUserGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Delete(ctx context.Context, in *UserGroupBriefRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AddingUsers(ctx context.Context, in *UsersInGroups, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DeletingUsers(ctx context.Context, in *UsersInGroups, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddUsersToGroups(ctx context.Context, in *UsersInGroups, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteUsersFromGroups(ctx context.Context, in *UsersInGroups, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type userGroupsClient struct {
@@ -100,20 +100,20 @@ func (c *userGroupsClient) Delete(ctx context.Context, in *UserGroupBriefRequest
 	return out, nil
 }
 
-func (c *userGroupsClient) AddingUsers(ctx context.Context, in *UsersInGroups, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *userGroupsClient) AddUsersToGroups(ctx context.Context, in *UsersInGroups, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, UserGroups_AddingUsers_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, UserGroups_AddUsersToGroups_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userGroupsClient) DeletingUsers(ctx context.Context, in *UsersInGroups, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *userGroupsClient) DeleteUsersFromGroups(ctx context.Context, in *UsersInGroups, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, UserGroups_DeletingUsers_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, UserGroups_DeleteUsersFromGroups_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -129,8 +129,8 @@ type UserGroupsServer interface {
 	Create(context.Context, *CreateUserGroupRequest) (*emptypb.Empty, error)
 	Update(context.Context, *UpdateUserGroupRequest) (*emptypb.Empty, error)
 	Delete(context.Context, *UserGroupBriefRequest) (*emptypb.Empty, error)
-	AddingUsers(context.Context, *UsersInGroups) (*emptypb.Empty, error)
-	DeletingUsers(context.Context, *UsersInGroups) (*emptypb.Empty, error)
+	AddUsersToGroups(context.Context, *UsersInGroups) (*emptypb.Empty, error)
+	DeleteUsersFromGroups(context.Context, *UsersInGroups) (*emptypb.Empty, error)
 	mustEmbedUnimplementedUserGroupsServer()
 }
 
@@ -156,11 +156,11 @@ func (UnimplementedUserGroupsServer) Update(context.Context, *UpdateUserGroupReq
 func (UnimplementedUserGroupsServer) Delete(context.Context, *UserGroupBriefRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedUserGroupsServer) AddingUsers(context.Context, *UsersInGroups) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddingUsers not implemented")
+func (UnimplementedUserGroupsServer) AddUsersToGroups(context.Context, *UsersInGroups) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUsersToGroups not implemented")
 }
-func (UnimplementedUserGroupsServer) DeletingUsers(context.Context, *UsersInGroups) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletingUsers not implemented")
+func (UnimplementedUserGroupsServer) DeleteUsersFromGroups(context.Context, *UsersInGroups) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUsersFromGroups not implemented")
 }
 func (UnimplementedUserGroupsServer) mustEmbedUnimplementedUserGroupsServer() {}
 func (UnimplementedUserGroupsServer) testEmbeddedByValue()                    {}
@@ -273,38 +273,38 @@ func _UserGroups_Delete_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserGroups_AddingUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserGroups_AddUsersToGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UsersInGroups)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserGroupsServer).AddingUsers(ctx, in)
+		return srv.(UserGroupsServer).AddUsersToGroups(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserGroups_AddingUsers_FullMethodName,
+		FullMethod: UserGroups_AddUsersToGroups_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserGroupsServer).AddingUsers(ctx, req.(*UsersInGroups))
+		return srv.(UserGroupsServer).AddUsersToGroups(ctx, req.(*UsersInGroups))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserGroups_DeletingUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserGroups_DeleteUsersFromGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UsersInGroups)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserGroupsServer).DeletingUsers(ctx, in)
+		return srv.(UserGroupsServer).DeleteUsersFromGroups(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserGroups_DeletingUsers_FullMethodName,
+		FullMethod: UserGroups_DeleteUsersFromGroups_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserGroupsServer).DeletingUsers(ctx, req.(*UsersInGroups))
+		return srv.(UserGroupsServer).DeleteUsersFromGroups(ctx, req.(*UsersInGroups))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -337,12 +337,12 @@ var UserGroups_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _UserGroups_Delete_Handler,
 		},
 		{
-			MethodName: "AddingUsers",
-			Handler:    _UserGroups_AddingUsers_Handler,
+			MethodName: "AddUsersToGroups",
+			Handler:    _UserGroups_AddUsersToGroups_Handler,
 		},
 		{
-			MethodName: "DeletingUsers",
-			Handler:    _UserGroups_DeletingUsers_Handler,
+			MethodName: "DeleteUsersFromGroups",
+			Handler:    _UserGroups_DeleteUsersFromGroups_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
