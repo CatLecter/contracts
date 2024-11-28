@@ -62,5 +62,5 @@ message UpdateGroupRequest {
 
 message UsersInGroup {
   string key = 1;
-  repeated string user_ids = 2;
+  repeated string usernames = 2;
 }
