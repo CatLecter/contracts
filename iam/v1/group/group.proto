@@ -12,16 +12,15 @@ service Groups {
   rpc Create                (CreateGroupRequest) returns (google.protobuf.Empty);
   rpc Update                (UpdateGroupRequest) returns (google.protobuf.Empty);
   rpc Delete                (GroupBriefRequest)  returns (google.protobuf.Empty);
-  rpc AddUsersToGroups      (UsersInGroups)      returns (google.protobuf.Empty);
-  rpc DeleteUsersFromGroups (UsersInGroups)      returns (google.protobuf.Empty);
+  rpc AddUsersToGroups      (UsersInGroup)      returns (google.protobuf.Empty);
+  rpc DeleteUsersFromGroups (UsersInGroup)      returns (google.protobuf.Empty);
 }
 
 message GroupBriefRequest {
-  string group_id = 1;
+  string key = 1;
 }
 
 message GroupResponse {
-  string group_id = 1;
   string key = 2;
   string name = 3;
   string description = 4;
@@ -61,7 +60,7 @@ message UpdateGroupRequest {
   string description = 3;
 }
 
-message UsersInGroups {
-  repeated string user_ids = 1;
-  repeated string group_ids = 2;
+message UsersInGroup {
+  string key = 1;
+  repeated string user_ids = 2;
 }
