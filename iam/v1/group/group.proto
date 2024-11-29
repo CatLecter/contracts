@@ -12,8 +12,8 @@ service Groups {
   rpc Create                (CreateGroupRequest) returns (google.protobuf.Empty);
   rpc Update                (UpdateGroupRequest) returns (google.protobuf.Empty);
   rpc Delete                (GroupBriefRequest)  returns (google.protobuf.Empty);
-  rpc AddUsersToGroups      (UsersInGroup)      returns (google.protobuf.Empty);
-  rpc DeleteUsersFromGroups (UsersInGroup)      returns (google.protobuf.Empty);
+  rpc AddUsersToGroup       (UsersInGroup)      returns (google.protobuf.Empty);
+  rpc DeleteUsersFromGroup  (UsersInGroup)      returns (google.protobuf.Empty);
 }
 
 message GroupBriefRequest {
