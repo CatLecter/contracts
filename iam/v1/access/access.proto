@@ -16,5 +16,5 @@ message AccessRequest {
 }
 
 message AccessResponse {
-  string is_allowed = 1;
+  bool is_allowed = 1;
 }
