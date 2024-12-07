@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package iam.access;
+
+option go_package = "github.com/CatLecter/contracts/gen/go/iam/v1;access";
+
+service Accesses {
+  rpc AccessVerification (AccessRequest) returns (AccessResponse);
+}
+
+message AccessRequest {
+  string user_id = 1;
+  string group = 2;
+  string action = 3;
+  string resource = 4;
+}
+
+message AccessResponse {
+  string is_allowed = 1;
+}

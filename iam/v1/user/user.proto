@@ -7,7 +7,7 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/CatLecter/contracts/gen/go/iam/v1;user";
 
-service User {
+service Users {
   rpc Create         (CreateUserRequest) returns (UserBriefResponse);
   rpc Get            (UserBriefRequest)  returns (UserResponse);
   rpc Update         (UpdateUserRequest) returns (google.protobuf.Empty);
