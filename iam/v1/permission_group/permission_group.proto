@@ -24,8 +24,8 @@ message GroupBriefRequest {
 
 message GroupResponse {
   string key = 1;
-  string description = 3;
-  string protected = 4;
+  string description = 2;
+  string protected = 3;
 }
 
 message SearchRequest {
@@ -50,13 +50,13 @@ message SearchResponse {
 
 message CreateGroupRequest {
   string key = 1;
-  string description = 3;
-  string protected = 4;
+  string description = 2;
+  string protected = 3;
 }
 
 message UpdateGroupRequest {
   string key = 1;
-  string description = 3;
+  string description = 2;
 }
 
 message UsersInGroup {
