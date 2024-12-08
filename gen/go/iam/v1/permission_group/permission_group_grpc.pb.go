@@ -20,15 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PermissionGroups_Get_FullMethodName                        = "/iam.permission_group.PermissionGroups/Get"
-	PermissionGroups_Search_FullMethodName                     = "/iam.permission_group.PermissionGroups/Search"
-	PermissionGroups_Create_FullMethodName                     = "/iam.permission_group.PermissionGroups/Create"
-	PermissionGroups_Update_FullMethodName                     = "/iam.permission_group.PermissionGroups/Update"
-	PermissionGroups_Delete_FullMethodName                     = "/iam.permission_group.PermissionGroups/Delete"
-	PermissionGroups_AddUsersToGroup_FullMethodName            = "/iam.permission_group.PermissionGroups/AddUsersToGroup"
-	PermissionGroups_DeleteUsersFromGroup_FullMethodName       = "/iam.permission_group.PermissionGroups/DeleteUsersFromGroup"
-	PermissionGroups_AddPermissionsToGroup_FullMethodName      = "/iam.permission_group.PermissionGroups/AddPermissionsToGroup"
-	PermissionGroups_DeletePermissionsFromGroup_FullMethodName = "/iam.permission_group.PermissionGroups/DeletePermissionsFromGroup"
+	PermissionGroups_Get_FullMethodName                  = "/iam.permission_group.PermissionGroups/Get"
+	PermissionGroups_Search_FullMethodName               = "/iam.permission_group.PermissionGroups/Search"
+	PermissionGroups_Create_FullMethodName               = "/iam.permission_group.PermissionGroups/Create"
+	PermissionGroups_Update_FullMethodName               = "/iam.permission_group.PermissionGroups/Update"
+	PermissionGroups_Delete_FullMethodName               = "/iam.permission_group.PermissionGroups/Delete"
+	PermissionGroups_AddUsersToGroup_FullMethodName      = "/iam.permission_group.PermissionGroups/AddUsersToGroup"
+	PermissionGroups_DeleteUsersFromGroup_FullMethodName = "/iam.permission_group.PermissionGroups/DeleteUsersFromGroup"
 )
 
 // PermissionGroupsClient is the client API for PermissionGroups service.
@@ -42,8 +40,6 @@ type PermissionGroupsClient interface {
 	Delete(ctx context.Context, in *GroupBriefRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AddUsersToGroup(ctx context.Context, in *UsersInGroup, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteUsersFromGroup(ctx context.Context, in *UsersInGroup, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AddPermissionsToGroup(ctx context.Context, in *PermissionsInGroup, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DeletePermissionsFromGroup(ctx context.Context, in *PermissionsInGroup, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type permissionGroupsClient struct {
@@ -124,26 +120,6 @@ func (c *permissionGroupsClient) DeleteUsersFromGroup(ctx context.Context, in *U
 	return out, nil
 }
 
-func (c *permissionGroupsClient) AddPermissionsToGroup(ctx context.Context, in *PermissionsInGroup, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, PermissionGroups_AddPermissionsToGroup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *permissionGroupsClient) DeletePermissionsFromGroup(ctx context.Context, in *PermissionsInGroup, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, PermissionGroups_DeletePermissionsFromGroup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // PermissionGroupsServer is the server API for PermissionGroups service.
 // All implementations must embed UnimplementedPermissionGroupsServer
 // for forward compatibility.
@@ -155,8 +131,6 @@ type PermissionGroupsServer interface {
 	Delete(context.Context, *GroupBriefRequest) (*emptypb.Empty, error)
 	AddUsersToGroup(context.Context, *UsersInGroup) (*emptypb.Empty, error)
 	DeleteUsersFromGroup(context.Context, *UsersInGroup) (*emptypb.Empty, error)
-	AddPermissionsToGroup(context.Context, *PermissionsInGroup) (*emptypb.Empty, error)
-	DeletePermissionsFromGroup(context.Context, *PermissionsInGroup) (*emptypb.Empty, error)
 	mustEmbedUnimplementedPermissionGroupsServer()
 }
 
@@ -187,12 +161,6 @@ func (UnimplementedPermissionGroupsServer) AddUsersToGroup(context.Context, *Use
 }
 func (UnimplementedPermissionGroupsServer) DeleteUsersFromGroup(context.Context, *UsersInGroup) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUsersFromGroup not implemented")
-}
-func (UnimplementedPermissionGroupsServer) AddPermissionsToGroup(context.Context, *PermissionsInGroup) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddPermissionsToGroup not implemented")
-}
-func (UnimplementedPermissionGroupsServer) DeletePermissionsFromGroup(context.Context, *PermissionsInGroup) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletePermissionsFromGroup not implemented")
 }
 func (UnimplementedPermissionGroupsServer) mustEmbedUnimplementedPermissionGroupsServer() {}
 func (UnimplementedPermissionGroupsServer) testEmbeddedByValue()                          {}
@@ -341,42 +309,6 @@ func _PermissionGroups_DeleteUsersFromGroup_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PermissionGroups_AddPermissionsToGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PermissionsInGroup)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PermissionGroupsServer).AddPermissionsToGroup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PermissionGroups_AddPermissionsToGroup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PermissionGroupsServer).AddPermissionsToGroup(ctx, req.(*PermissionsInGroup))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PermissionGroups_DeletePermissionsFromGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PermissionsInGroup)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PermissionGroupsServer).DeletePermissionsFromGroup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PermissionGroups_DeletePermissionsFromGroup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PermissionGroupsServer).DeletePermissionsFromGroup(ctx, req.(*PermissionsInGroup))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // PermissionGroups_ServiceDesc is the grpc.ServiceDesc for PermissionGroups service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -411,14 +343,6 @@ var PermissionGroups_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteUsersFromGroup",
 			Handler:    _PermissionGroups_DeleteUsersFromGroup_Handler,
-		},
-		{
-			MethodName: "AddPermissionsToGroup",
-			Handler:    _PermissionGroups_AddPermissionsToGroup_Handler,
-		},
-		{
-			MethodName: "DeletePermissionsFromGroup",
-			Handler:    _PermissionGroups_DeletePermissionsFromGroup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

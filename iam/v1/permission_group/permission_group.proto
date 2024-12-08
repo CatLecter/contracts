@@ -14,8 +14,6 @@ service PermissionGroups {
   rpc Delete                     (GroupBriefRequest)  returns (google.protobuf.Empty);
   rpc AddUsersToGroup            (UsersInGroup)       returns (google.protobuf.Empty);
   rpc DeleteUsersFromGroup       (UsersInGroup)       returns (google.protobuf.Empty);
-  rpc AddPermissionsToGroup      (PermissionsInGroup) returns (google.protobuf.Empty);
-  rpc DeletePermissionsFromGroup (PermissionsInGroup) returns (google.protobuf.Empty);
 }
 
 message GroupBriefRequest {
@@ -62,9 +60,4 @@ message UpdateGroupRequest {
 message UsersInGroup {
   string          group_key = 1;
   repeated string usernames = 2;
-}
-
-message PermissionsInGroup {
-  string          group_key = 1;
-  repeated string permission_key = 2;
 }
