@@ -10,9 +10,9 @@ service Accesses {
 
 message AccessRequest {
   string user_id = 1;
-  string group = 2;
+  string permission_group = 2;
   string action = 3;
-  string resource = 4;
+  string target_resource = 4;
 }
 
 message AccessResponse {
